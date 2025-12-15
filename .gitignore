@@ -1,0 +1,4 @@
+.clang-format
+en.subject.pdf
+*.o
+ex00/my_first_class_in_OCF
