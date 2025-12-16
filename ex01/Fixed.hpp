@@ -15,14 +15,13 @@
 
 #include <iostream>
 
-class Fixed
-{
+class Fixed {
 public:
   Fixed(void);
   Fixed(int integer);
   Fixed(double float_num);
-  Fixed(const Fixed& other);
-  Fixed& operator=(const Fixed& other);
+  Fixed(const Fixed &other);
+  Fixed &operator=(const Fixed &other);
   ~Fixed(void);
   int getRawBits(void) const;
   void setRawBits(int const raw);
@@ -35,6 +34,6 @@ private:
   static const int _frac_bits = 8;
 };
 
-std::ostream& operator<<(std::ostream& os, const Fixed& c);
+std::ostream &operator<<(std::ostream &os, const Fixed &c);
 
 #endif
