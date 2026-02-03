@@ -6,7 +6,7 @@
 /*   By: takawauc <takawauc@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 12:46:39 by takawauc          #+#    #+#             */
-/*   Updated: 2026/02/03 21:37:53 by takawauc         ###   ########.fr       */
+/*   Updated: 2026/02/03 21:48:30 by takawauc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ Fixed::Fixed(void) : _rawBits(0)
   std::cout << "Default constructor called\n";
 }
 
-Fixed::Fixed(int integer) : _rawBits(integer << 8)
+Fixed::Fixed(int integer) : _rawBits(integer << _frac_bits)
 {
   std::cout << "Int constructor called\n";
 }
@@ -43,13 +43,11 @@ Fixed::Fixed(const Fixed& other)
 
 int Fixed::getRawBits(void) const
 {
-  // std::cout << "getRawBits member function called\n";
   return _rawBits;
 }
 
 void Fixed::setRawBits(int const raw)
 {
-  // std::cout << "setRawBits member function called\n";
   _rawBits = raw;
 }
 

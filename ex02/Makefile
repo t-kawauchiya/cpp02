@@ -12,9 +12,6 @@ SRC_FILES = Fixed.cpp main.cpp
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
 OBJ = $(addprefix $(OBJ_DIR), $(SRC_FILES:.cpp=.o))
 
-TEST_DIR = tests/
-TEST = test.sh
-
 all: $(NAME)
 
 $(NAME): $(OBJ)

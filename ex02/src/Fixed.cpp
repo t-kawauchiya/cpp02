@@ -6,7 +6,7 @@
 /*   By: takawauc <takawauc@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 12:46:39 by takawauc          #+#    #+#             */
-/*   Updated: 2026/02/03 20:59:06 by takawauc         ###   ########.fr       */
+/*   Updated: 2026/02/03 22:17:00 by takawauc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,15 @@ void Fixed::setRawBits(int const raw)
 {
   _rawBits = raw;
 }
+
 float Fixed::toFloat(void) const
 {
-  return (float)_rawBits / (1 << _frac_bits);
+  return (float)_rawBits / (float)(1 << _frac_bits);
 }
 
 int Fixed::toInt(void) const
 {
-  return _rawBits >> _frac_bits;
+  return static_cast<int>(this->_rawBits / (1 << this->_frac_bits));
 }
 
 Fixed& Fixed::operator=(const Fixed& other)
