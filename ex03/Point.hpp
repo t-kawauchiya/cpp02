@@ -1,39 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Fixed.hpp                                          :+:      :+:    :+:   */
+/*   Point.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: takawauc <takawauc@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 12:40:30 by takawauc          #+#    #+#             */
-/*   Updated: 2025/12/15 14:18:19 by takawauc         ###   ########.fr       */
+/*   Updated: 2025/12/16 22:28:29 by takawauc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef _FIXED_H_
-#define _FIXED_H_
+#ifndef _POINT_H_
+#define _POINT_H_
+
+#include "Fixed.hpp"
 
 #include <iostream>
 
-class Fixed {
+class Point
+{
 public:
-  Fixed(void);
-  Fixed(int integer);
-  Fixed(double float_num);
-  Fixed(const Fixed &other);
-  Fixed &operator=(const Fixed &other);
-  ~Fixed(void);
-  int getRawBits(void) const;
-  void setRawBits(int const raw);
+  Point(void);
+  Point(float x, float y);
+  Point(const Point& other);
+  Point& operator=(const Point& other);
+  ~Point(void);
 
-  float toFloat(void) const;
-  int toInt(void) const;
+  Fixed getX(void) const;
+  Fixed getY(void) const;
+  void setX(const Fixed x);
+  void setX(const float x);
+  void setY(const Fixed x);
+  void setY(const float x);
+
+  Fixed cross(const Point p);
+  Point operator+(const Point) const;
+  Point operator-(const Point) const;
 
 private:
-  int _rawBits;
-  static const int _frac_bits = 8;
+  Fixed _x;
+  Fixed _y;
 };
 
-std::ostream &operator<<(std::ostream &os, const Fixed &c);
+std::ostream& operator<<(std::ostream& os, const Point& c);
 
 #endif

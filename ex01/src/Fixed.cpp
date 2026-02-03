@@ -6,7 +6,7 @@
 /*   By: takawauc <takawauc@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 12:46:39 by takawauc          #+#    #+#             */
-/*   Updated: 2026/02/03 18:49:30 by takawauc         ###   ########.fr       */
+/*   Updated: 2026/02/03 19:40:09 by takawauc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,27 +43,32 @@ Fixed::Fixed(const Fixed& other)
 
 int Fixed::getRawBits(void) const
 {
-  std::cout << "getRawBits member function called\n";
-  return this->_rawBits;
+  // std::cout << "getRawBits member function called\n";
+  return _rawBits;
 }
 
 void Fixed::setRawBits(int const raw)
 {
-  std::cout << "setRawBits member function called\n";
-  this->_rawBits = raw;
+  // std::cout << "setRawBits member function called\n";
+  _rawBits = raw;
+}
+float Fixed::toFloat(void) const
+{
+  return (float)_rawBits / (1 << _frac_bits);
 }
 
 Fixed& Fixed::operator=(const Fixed& other)
 {
   std::cout << "Copy assignment operator called\n";
   if (this != &other)
-    this->_rawBits = other.getRawBits();
+    _rawBits = other.getRawBits();
 
   return (*this);
 }
 
 std::ostream& operator<<(std::ostream& os, const Fixed& f)
 {
-  os << "first_name   : " << f.getRawBits() << "\n";
+
+  os << f.toFloat();
   return os;
 }
