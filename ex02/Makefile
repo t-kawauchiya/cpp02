@@ -1,19 +1,16 @@
 NAME = now_were_taiking
 
-DFLAGS = -g -fsanitize=address -fsanitize=leak
+CXX = c++
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic -Iinclude
+LDFLAGS =
 
-CLANGD_TEMPLATE := ~/.config/clangd_templates/default.clangd
-CLANGD_TARGET := .clangd
+SANFLAGS = -g -fsanitize=address -fsanitize=leak -fno-omit-frame-pointer
 
-SRC_DIR = ./
-
+SRC_DIR = src/
+OBJ_DIR = obj/
 SRC_FILES = Fixed.cpp main.cpp
-
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
-OBJ = $(SRC:.cpp=.o)
-
-CC = c++
-CFLAGS = -Wall -Wextra -Werror -std=c++98
+OBJ = $(addprefix $(OBJ_DIR), $(SRC_FILES:.cpp=.o))
 
 TEST_DIR = tests/
 TEST = test.sh
@@ -21,24 +18,22 @@ TEST = test.sh
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(OBJ) -o $(NAME)
+	$(CXX) $(OBJ) $(LDFLAGS) -o $(NAME)
 
-debug: CFLAGS += $(DFLAGS)
-debug: clean
-	$(CC) $(SRC) $(CFLAGS) -o $(NAME)
+$(OBJ_DIR)%.o: $(SRC_DIR)%.cpp
+	@mkdir -p $(OBJ_DIR)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-%.o: %.cpp 
-	@$(CC) $(CFLAGS) -c $< -o $@
-
-test: debug
-	@bash $(TEST_DIR)$(TEST)
+debug: CXXFLAGS += $(SANFLAGS)
+debug: LDFLAGS += $(SANFLAGS)
+debug: fclean all
 
 clean:
-	@rm -f $(OBJ)
+	rm -f $(OBJ)
 
 fclean: clean
-	@rm -f $(NAME)
+	rm -f $(NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean re debug
+.PHONY: all debug clean fclean re test
