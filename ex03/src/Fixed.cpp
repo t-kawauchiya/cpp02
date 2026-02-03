@@ -6,7 +6,7 @@
 /*   By: takawauc <takawauc@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 12:46:39 by takawauc          #+#    #+#             */
-/*   Updated: 2025/12/16 20:33:12 by takawauc         ###   ########.fr       */
+/*   Updated: 2026/02/03 22:17:00 by takawauc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 
 Fixed::Fixed(void) : _rawBits(0) {}
 
-Fixed::Fixed(int integer) : _rawBits(integer << 8) {}
+Fixed::Fixed(int integer) : _rawBits(integer << _frac_bits) {}
 
-Fixed::Fixed(double float_num) : _rawBits(std::roundf(float_num * (1 << _frac_bits))) {}
+Fixed::Fixed(double float_num) : _rawBits(roundf(float_num * (1 << _frac_bits))) {}
 
 Fixed::~Fixed(void) {}
 
@@ -37,14 +37,15 @@ void Fixed::setRawBits(int const raw)
 {
   _rawBits = raw;
 }
+
 float Fixed::toFloat(void) const
 {
-  return (float)_rawBits / (1 << _frac_bits);
+  return (float)_rawBits / (float)(1 << _frac_bits);
 }
 
 int Fixed::toInt(void) const
 {
-  return _rawBits >> _frac_bits;
+  return static_cast<int>(this->_rawBits / (1 << this->_frac_bits));
 }
 
 Fixed& Fixed::operator=(const Fixed& other)
@@ -109,9 +110,9 @@ Fixed Fixed::operator-(const Fixed& f) const
 Fixed Fixed::operator*(const Fixed& f) const
 {
   Fixed ret;
-  long long a = this->getRawBits();
-  long long b = f.getRawBits();
-  long long result;
+  long a = this->getRawBits();
+  long b = f.getRawBits();
+  long result;
 
   result = a * b >> _frac_bits;
   ret.setRawBits((int)result);
@@ -121,10 +122,12 @@ Fixed Fixed::operator*(const Fixed& f) const
 Fixed Fixed::operator/(const Fixed& f) const
 {
   Fixed ret;
-  long long a = this->getRawBits() << _frac_bits;
-  long long b = f.getRawBits();
-  long long result;
+  long a = this->getRawBits() << _frac_bits;
+  long b = f.getRawBits();
+  long result;
 
+  if (b == 0)
+    throw std::runtime_error("division by zero");
   result = a / b;
 
   ret.setRawBits((int)result);
