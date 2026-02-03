@@ -6,7 +6,7 @@
 /*   By: takawauc <takawauc@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 13:15:27 by takawauc          #+#    #+#             */
-/*   Updated: 2025/12/15 13:47:52 by takawauc         ###   ########.fr       */
+/*   Updated: 2026/02/03 21:37:27 by takawauc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,31 +17,21 @@
 int main(void)
 {
   Fixed a;
-  // L Default constructor called
-  Fixed b(a);
-  // L Copy constructor called
-  // L Copy assignment operator called
-  // // <-- This line may be missing depending on your implementation
-  // getRawBits member function called
-  Fixed c;
-  // L Default constructor called
+  Fixed const b(10);
+  Fixed c(42.42f);
+  Fixed d(b);
 
-  c = b;
-  // L Copy assignment operator called
-  // getRawBits member function called
+  a = Fixed(1234.4321f);
 
-  std::cout << a.getRawBits() << std::endl;
-  // L getRawBits member function called
-  // L 0
-  std::cout << b.getRawBits() << std::endl;
-  // L getRawBits member function called
-  // L 0
-  std::cout << c.getRawBits() << std::endl;
-  // L getRawBits member function called
-  // L 0
+  std::cout << "a is " << a << std::endl;
+  std::cout << "b is " << b << std::endl;
+  std::cout << "c is " << c << std::endl;
+  std::cout << "d is " << d << std::endl;
 
-  // L Destructor called
-  // L Destructor called
-  // L Destructor called
+  std::cout << "a is " << a.toInt() << " as integer" << std::endl;
+  std::cout << "b is " << b.toInt() << " as integer" << std::endl;
+  std::cout << "c is " << c.toInt() << " as integer" << std::endl;
+  std::cout << "d is " << d.toInt() << " as integer" << std::endl;
+
   return 0;
 }
