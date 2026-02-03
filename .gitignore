@@ -1,4 +1,8 @@
-.clang-format
-en.subject.pdf
 *.o
+.cache
 ex00/my_first_class_in_OCF
+ex01/towards_a_more_useful_fixed-point_number_class
+
+.clang-format
+compile_commands.json
+en.subject.pdf
