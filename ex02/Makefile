@@ -15,7 +15,7 @@ OBJ = $(addprefix $(OBJ_DIR), $(SRC_FILES:.cpp=.o))
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CXX) $(OBJ) $(LDFLAGS) -o $(NAME)
+	$(CXX) $(CXXFLAGS) $(OBJ) $(LDFLAGS) -o $(NAME)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.cpp
 	@mkdir -p $(OBJ_DIR)
