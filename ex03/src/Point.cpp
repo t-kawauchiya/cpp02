@@ -6,7 +6,7 @@
 /*   By: takawauc <takawauc@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 21:43:33 by takawauc          #+#    #+#             */
-/*   Updated: 2025/12/16 22:47:17 by takawauc         ###   ########.fr       */
+/*   Updated: 2026/02/06 19:02:52 by takawauc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,14 @@
 
 Point::Point(void) : _x(0), _y(0) {}
 
-Point::Point(float x, float y)
-{
-  this->setX(Fixed(x));
-  this->setY(Fixed(y));
-}
+Point::Point(float x, float y) : _x(x), _y(y) {}
 
 Point::Point(const Point& other)
 {
   *this = other;
 }
+
+Point::~Point(void) {}
 
 Point& Point::operator=(const Point& other)
 {
@@ -34,8 +32,6 @@ Point& Point::operator=(const Point& other)
   }
   return *this;
 }
-
-Point::~Point(void) {}
 
 Fixed Point::getX(void) const
 {

@@ -6,20 +6,38 @@
 /*   By: takawauc <takawauc@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 12:46:39 by takawauc          #+#    #+#             */
-/*   Updated: 2026/02/03 22:17:00 by takawauc         ###   ########.fr       */
+/*   Updated: 2026/02/06 17:48:01 by takawauc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
 
+#include <climits>
 #include <cmath>
 #include <iostream>
 
 Fixed::Fixed(void) : _rawBits(0) {}
 
-Fixed::Fixed(int integer) : _rawBits(integer << _frac_bits) {}
+Fixed::Fixed(int integer)
+{
+  int int_part_bits = 32 - _frac_bits;
+  const int max_int = (1 << (int_part_bits - 1)) - 1;
+  const int min_int = -(1 << (int_part_bits - 1));
 
-Fixed::Fixed(double float_num) : _rawBits(roundf(float_num * (1 << _frac_bits))) {}
+  if (integer > max_int)
+    _rawBits = (int)((int64_t)max_int << _frac_bits);
+  else if (integer < min_int)
+    _rawBits = (int)((int64_t)min_int << _frac_bits);
+  else
+    _rawBits = integer << (int)((int64_t)_frac_bits);
+}
+
+Fixed::Fixed(float float_num)
+{
+  if (!std::isfinite(float_num))
+    _rawBits = (float_num < 0) ? INT_MAX : INT_MIN;
+  _rawBits = roundf(float_num * (1 << _frac_bits));
+}
 
 Fixed::~Fixed(void) {}
 
@@ -38,14 +56,14 @@ void Fixed::setRawBits(int const raw)
   _rawBits = raw;
 }
 
-float Fixed::toFloat(void) const
-{
-  return (float)_rawBits / (float)(1 << _frac_bits);
-}
-
 int Fixed::toInt(void) const
 {
   return static_cast<int>(this->_rawBits / (1 << this->_frac_bits));
+}
+
+float Fixed::toFloat(void) const
+{
+  return (float)_rawBits / (float)(1 << _frac_bits);
 }
 
 Fixed& Fixed::operator=(const Fixed& other)

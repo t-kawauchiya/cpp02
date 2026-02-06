@@ -6,7 +6,7 @@
 /*   By: takawauc <takawauc@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 12:40:30 by takawauc          #+#    #+#             */
-/*   Updated: 2025/12/16 22:28:29 by takawauc         ###   ########.fr       */
+/*   Updated: 2026/02/06 19:02:06 by takawauc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@ public:
   Point(void);
   Point(float x, float y);
   Point(const Point& other);
-  Point& operator=(const Point& other);
   ~Point(void);
+
+  Point& operator=(const Point& other);
 
   Fixed getX(void) const;
   Fixed getY(void) const;

@@ -6,7 +6,7 @@
 /*   By: takawauc <takawauc@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 12:40:30 by takawauc          #+#    #+#             */
-/*   Updated: 2025/12/16 19:04:39 by takawauc         ###   ########.fr       */
+/*   Updated: 2026/02/06 17:26:26 by takawauc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,15 @@ class Fixed
 public:
   Fixed(void);
   Fixed(int integer);
-  Fixed(double float_num);
+  Fixed(float float_num);
   Fixed(const Fixed& other);
-  Fixed& operator=(const Fixed& other);
   ~Fixed(void);
+
+  Fixed& operator=(const Fixed& other);
+
   int getRawBits(void) const;
   void setRawBits(int const raw);
+
   float toFloat(void) const;
   int toInt(void) const;
 
