@@ -33,4 +33,12 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all debug clean fclean re test
+val: re
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME)
+	
+leak_check: debug
+	ASAN_OPTIONS=detect_leaks=1 \
+	LSAN_OPTIONS=use_registers=0:report_objects=1 \
+	./$(NAME)
+
+.PHONY: all debug clean fclean re val leak_check
