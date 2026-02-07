@@ -6,7 +6,7 @@
 /*   By: takawauc <takawauc@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 12:46:39 by takawauc          #+#    #+#             */
-/*   Updated: 2026/02/06 17:48:01 by takawauc         ###   ########.fr       */
+/*   Updated: 2026/02/07 21:11:43 by takawauc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,19 @@ Fixed::Fixed(float float_num)
   _rawBits = roundf(float_num * (1 << _frac_bits));
 }
 
-Fixed::~Fixed(void) {}
-
 Fixed::Fixed(const Fixed& other)
 {
   *this = other;
 }
+
+Fixed& Fixed::operator=(const Fixed& other)
+{
+  if (this != &other)
+    _rawBits = other.getRawBits();
+  return (*this);
+}
+
+Fixed::~Fixed(void) {}
 
 int Fixed::getRawBits(void) const
 {
@@ -58,19 +65,12 @@ void Fixed::setRawBits(int const raw)
 
 int Fixed::toInt(void) const
 {
-  return static_cast<int>(this->_rawBits / (1 << this->_frac_bits));
+  return (this->_rawBits / (1 << this->_frac_bits));
 }
 
 float Fixed::toFloat(void) const
 {
   return (float)_rawBits / (float)(1 << _frac_bits);
-}
-
-Fixed& Fixed::operator=(const Fixed& other)
-{
-  if (this != &other)
-    _rawBits = other.getRawBits();
-  return (*this);
 }
 
 std::ostream& operator<<(std::ostream& os, const Fixed& f)
