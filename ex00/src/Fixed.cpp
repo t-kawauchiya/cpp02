@@ -6,7 +6,7 @@
 /*   By: takawauc <takawauc@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 12:46:39 by takawauc          #+#    #+#             */
-/*   Updated: 2026/02/06 14:07:43 by takawauc         ###   ########.fr       */
+/*   Updated: 2026/02/07 20:53:03 by takawauc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ Fixed& Fixed::operator=(const Fixed& other)
   std::cout << "Copy assignment operator called\n";
   if (this != &other)
     this->_rawBits = other.getRawBits();
-
   return (*this);
 }
 

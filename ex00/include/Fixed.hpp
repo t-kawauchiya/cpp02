@@ -6,12 +6,11 @@
 /*   By: takawauc <takawauc@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 12:40:30 by takawauc          #+#    #+#             */
-/*   Updated: 2026/02/06 14:04:31 by takawauc         ###   ########.fr       */
+/*   Updated: 2026/02/07 21:24:26 by takawauc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef _FIXED_H_
-#define _FIXED_H_
+#pragma once
 
 class Fixed
 {
@@ -29,5 +28,3 @@ private:
   int _rawBits;
   static const int _frac_bits = 8;
 };
-
-#endif
