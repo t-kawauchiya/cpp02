@@ -6,7 +6,7 @@
 /*   By: takawauc <takawauc@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 12:46:39 by takawauc          #+#    #+#             */
-/*   Updated: 2026/02/08 08:45:57 by takawauc         ###   ########.fr       */
+/*   Updated: 2026/02/08 09:01:03 by takawauc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,14 +82,14 @@ void Fixed::setRawBits(int const raw)
   _rawBits = raw;
 }
 
-float Fixed::toFloat(void) const
-{
-  return (float)_rawBits / (float)(1 << _frac_bits);
-}
-
 int Fixed::toInt(void) const
 {
   return (this->_rawBits / (1 << _frac_bits));
+}
+
+float Fixed::toFloat(void) const
+{
+  return (float)_rawBits / (float)(1 << _frac_bits);
 }
 
 std::ostream& operator<<(std::ostream& os, const Fixed& f)

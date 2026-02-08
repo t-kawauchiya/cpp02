@@ -6,36 +6,44 @@
 /*   By: takawauc <takawauc@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 12:46:39 by takawauc          #+#    #+#             */
-/*   Updated: 2026/02/07 21:11:43 by takawauc         ###   ########.fr       */
+/*   Updated: 2026/02/08 09:00:38 by takawauc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
 
-#include <climits>
 #include <cmath>
 #include <iostream>
+#include <limits>
 
 Fixed::Fixed(void) : _rawBits(0) {}
 
-Fixed::Fixed(int integer)
+Fixed::Fixed(const int& integer)
 {
-  int int_part_bits = 32 - _frac_bits;
-  const int max_int = (1 << (int_part_bits - 1)) - 1;
-  const int min_int = -(1 << (int_part_bits - 1));
+  int64_t raw = (int64_t)integer * (1L << _frac_bits);
 
-  if (integer > max_int)
-    _rawBits = (int)((int64_t)max_int << _frac_bits);
-  else if (integer < min_int)
-    _rawBits = (int)((int64_t)min_int << _frac_bits);
-  else
-    _rawBits = integer << (int)((int64_t)_frac_bits);
+  if (raw > (int64_t)std::numeric_limits<int>::max())
+    raw = std::numeric_limits<int>::max();
+  else if (raw < (int64_t)std::numeric_limits<int>::min())
+    raw = std::numeric_limits<int>::min();
+  _rawBits = (int)raw;
 }
 
-Fixed::Fixed(float float_num)
+Fixed::Fixed(const float& float_num)
 {
   if (!std::isfinite(float_num))
-    _rawBits = (float_num < 0) ? INT_MAX : INT_MIN;
+  {
+    if (float_num < 0)
+      _rawBits = std::numeric_limits<int>::min();
+    else
+      _rawBits = std::numeric_limits<int>::max();
+    return;
+  }
+  double raw = (double)float_num * (1 << _frac_bits);
+  if (raw > (double)std::numeric_limits<int>::max())
+    _rawBits = std::numeric_limits<int>::min();
+  else if (raw < (double)std::numeric_limits<int>::min())
+    _rawBits = std::numeric_limits<int>::min();
   _rawBits = roundf(float_num * (1 << _frac_bits));
 }
 
@@ -44,14 +52,14 @@ Fixed::Fixed(const Fixed& other)
   *this = other;
 }
 
+Fixed::~Fixed(void) {}
+
 Fixed& Fixed::operator=(const Fixed& other)
 {
   if (this != &other)
     _rawBits = other.getRawBits();
   return (*this);
 }
-
-Fixed::~Fixed(void) {}
 
 int Fixed::getRawBits(void) const
 {
