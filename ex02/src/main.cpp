@@ -6,7 +6,7 @@
 /*   By: takawauc <takawauc@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 13:15:27 by takawauc          #+#    #+#             */
-/*   Updated: 2026/02/06 18:58:00 by takawauc         ###   ########.fr       */
+/*   Updated: 2026/02/08 20:08:01 by takawauc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,52 +54,68 @@ int main(void)
 
     std::cout << "  (>) \n";
     std::cout << "    Fixed(5.05f) > Fixed(2) : ";
-    Fixed(5.05f) > Fixed(2) ? std::cout << "true" : std::cout << "false" << "\n";
+    Fixed(5.05f) > Fixed(2) ? std::cout << "true" : std::cout << "false";
+    std::cout << "\n";
     std::cout << "    Fixed(2) > Fixed(5.05f) : ";
-    Fixed(2) > Fixed(5.05f) ? std::cout << "true" : std::cout << "false" << "\n";
+    Fixed(2) > Fixed(5.05f) ? std::cout << "true" : std::cout << "false";
+    std::cout << "\n";
     std::cout << "    Fixed(2) > Fixed(2) : ";
-    Fixed(2) > Fixed(2) ? std::cout << "true" : std::cout << "false" << "\n";
+    Fixed(2) > Fixed(2) ? std::cout << "true" : std::cout << "false";
+    std::cout << "\n";
 
     std::cout << "  (<) \n";
     std::cout << "    Fixed(5.05f) < Fixed(2) : ";
-    Fixed(5.05f) < Fixed(2) ? std::cout << "true" : std::cout << "false" << "\n";
+    Fixed(5.05f) < Fixed(2) ? std::cout << "true" : std::cout << "false";
+    std::cout << "\n";
     std::cout << "    Fixed(2) < Fixed(5.05f) : ";
-    Fixed(2) < Fixed(5.05f) ? std::cout << "true" : std::cout << "false" << "\n";
+    Fixed(2) < Fixed(5.05f) ? std::cout << "true" : std::cout << "false";
+    std::cout << "\n";
     std::cout << "    Fixed(2) < Fixed(2) : ";
-    Fixed(2) < Fixed(2) ? std::cout << "true" : std::cout << "false" << "\n";
+    Fixed(2) < Fixed(2) ? std::cout << "true" : std::cout << "false";
+    std::cout << "\n";
 
     std::cout << "  (>=) \n";
     std::cout << "    Fixed(5.05f) >= Fixed(2) : ";
-    Fixed(5.05f) >= Fixed(2) ? std::cout << "true" : std::cout << "false" << "\n";
+    Fixed(5.05f) >= Fixed(2) ? std::cout << "true" : std::cout << "false";
+    std::cout << "\n";
     std::cout << "    Fixed(2) >= Fixed(5.05f) : ";
-    Fixed(2) >= Fixed(5.05f) ? std::cout << "true" : std::cout << "false" << "\n";
+    Fixed(2) >= Fixed(5.05f) ? std::cout << "true" : std::cout << "false";
+    std::cout << "\n";
     std::cout << "    Fixed(2) > Fixed(2) : ";
-    Fixed(2) >= Fixed(2) ? std::cout << "true" : std::cout << "false" << "\n";
+    Fixed(2) >= Fixed(2) ? std::cout << "true" : std::cout << "false";
+    std::cout << "\n";
 
     std::cout << "  (<=) \n";
     std::cout << "    Fixed(5.05f) <= Fixed(2) : ";
-    Fixed(5.05f) <= Fixed(2) ? std::cout << "true" : std::cout << "false" << "\n";
+    Fixed(5.05f) <= Fixed(2) ? std::cout << "true" : std::cout << "false";
+    std::cout << "\n";
     std::cout << "    Fixed(2) <= Fixed(5.05f) : ";
-    Fixed(2) <= Fixed(5.05f) ? std::cout << "true" : std::cout << "false" << "\n";
+    Fixed(2) <= Fixed(5.05f) ? std::cout << "true" : std::cout << "false";
+    std::cout << "\n";
     std::cout << "    Fixed(2) <= Fixed(2) : ";
-    Fixed(2) <= Fixed(2) ? std::cout << "true" : std::cout << "false" << "\n";
+    Fixed(2) <= Fixed(2) ? std::cout << "true" : std::cout << "false";
+    std::cout << "\n";
 
     std::cout << "  (==) \n";
     std::cout << "    Fixed(5.05f) == Fixed(2) : ";
-    Fixed(5.05f) == Fixed(2) ? std::cout << "true" : std::cout << "false" << "\n";
+    Fixed(5.05f) == Fixed(2) ? std::cout << "true" : std::cout << "false";
+    std::cout << "\n";
     std::cout << "    Fixed(2) == Fixed(2) : ";
-    Fixed(2) == Fixed(2) ? std::cout << "true" : std::cout << "false" << "\n";
+    Fixed(2) == Fixed(2) ? std::cout << "true" : std::cout << "false";
+    std::cout << "\n";
 
     std::cout << "  (!=) \n";
     std::cout << "    Fixed(5.05f) != Fixed(2) : ";
-    Fixed(5.05f) != Fixed(2) ? std::cout << "true" : std::cout << "false" << "\n";
+    Fixed(5.05f) != Fixed(2) ? std::cout << "true" : std::cout << "false";
+    std::cout << "\n";
     std::cout << "    Fixed(2) != Fixed(2) : ";
-    Fixed(2) != Fixed(2) ? std::cout << "true" : std::cout << "false" << "\n";
+    Fixed(2) != Fixed(2) ? std::cout << "true" : std::cout << "false";
+    std::cout << "\n";
 
     std::cout << separator;
     Fixed a(5);
     std::cout << "(increment)" << std::endl;
-    std::cout << "  a  : " << std::endl;
+    std::cout << "  a  : " << a << std::endl;
     std::cout << "  ++a: " << ++a << std::endl;
     std::cout << "  a  : " << a << std::endl;
     std::cout << "  a++: " << a++ << std::endl;
@@ -108,7 +124,7 @@ int main(void)
     std::cout << separator;
     std::cout << "(decrement)" << std::endl;
     a = 5;
-    std::cout << "  a  : " << std::endl;
+    std::cout << "  a  : " << a << std::endl;
     std::cout << "  --a: " << --a << std::endl;
     std::cout << "  a  : " << a << std::endl;
     std::cout << "  a--: " << a-- << std::endl;
