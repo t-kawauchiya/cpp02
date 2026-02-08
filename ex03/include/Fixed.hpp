@@ -6,7 +6,7 @@
 /*   By: takawauc <takawauc@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 12:40:30 by takawauc          #+#    #+#             */
-/*   Updated: 2026/02/06 17:26:26 by takawauc         ###   ########.fr       */
+/*   Updated: 2026/02/08 08:58:44 by takawauc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,10 @@ class Fixed
 {
 public:
   Fixed(void);
-  Fixed(int integer);
-  Fixed(float float_num);
+  Fixed(const int& integer);
+  Fixed(const float& float_num);
   Fixed(const Fixed& other);
+
   ~Fixed(void);
 
   Fixed& operator=(const Fixed& other);

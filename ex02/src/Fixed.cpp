@@ -6,7 +6,7 @@
 /*   By: takawauc <takawauc@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 12:46:39 by takawauc          #+#    #+#             */
-/*   Updated: 2026/02/08 09:00:38 by takawauc         ###   ########.fr       */
+/*   Updated: 2026/02/08 19:46:30 by takawauc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,10 @@ Fixed Fixed::operator+(const Fixed& f) const
 {
   Fixed ret;
 
-  ret.setRawBits(this->getRawBits() + f.getRawBits());
+  unsigned int ua = this->getRawBits();
+  unsigned int ub = f.getRawBits();
+
+  ret._rawBits = (int)ua + ub;
   return ret;
 }
 
@@ -129,34 +132,33 @@ Fixed Fixed::operator-(const Fixed& f) const
 {
   Fixed ret;
 
-  ret.setRawBits(this->getRawBits() - f.getRawBits());
+  unsigned int ua = this->getRawBits();
+  unsigned int ub = f.getRawBits();
+
+  ret._rawBits = (int)ua - ub;
   return ret;
 }
 
 Fixed Fixed::operator*(const Fixed& f) const
 {
   Fixed ret;
-  long a = this->getRawBits();
-  long b = f.getRawBits();
-  long result;
+  int64_t a = this->getRawBits();
+  int64_t b = f.getRawBits();
 
-  result = a * b >> _frac_bits;
-  ret.setRawBits((int)result);
+  ret._rawBits = (int)((a * b / (1 << _frac_bits)));
   return ret;
 }
 
 Fixed Fixed::operator/(const Fixed& f) const
 {
   Fixed ret;
-  long a = this->getRawBits() << _frac_bits;
-  long b = f.getRawBits();
-  long result;
+  int64_t a = this->getRawBits();
+  int64_t b = f.getRawBits();
 
   if (b == 0)
-    throw std::runtime_error("division by zero");
-  result = a / b;
+    throw std::runtime_error("divided by zero");
 
-  ret.setRawBits((int)result);
+  ret._rawBits = (int)(a * (1 << _frac_bits) / b);
   return ret;
 }
 
